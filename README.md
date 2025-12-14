@@ -65,27 +65,6 @@ The frontend communicates with the backend via REST APIs and manages authenticat
 
 ---
 
-## 📂 Project Structure
-
-task-manager
-├── taskmanager - backend
-│ ├── src
-│ ├── pom.xml
-│ ├── Dockerfile
-│ ├── docker-compose.yml
-│ └── src/test
-│
-├── taskmanager-frontend
-│ ├── src
-│ ├── package.json
-│ ├── vite.config.ts
-│ └── public
-│
-└── README.md
-
-
-
----
 
 ## 🛠️ Technologies Used
 
@@ -122,52 +101,83 @@ The backend and PostgreSQL database are fully **Dockerized**.
 
 ### ▶️ Run Backend + Database with Docker
 
-From the backend folder:
+From the backend folder, run:
 
-```bash
-cd taskmanager - backend
-docker-compose up --build
+    cd taskmanager - backend
+    docker-compose up --build
 
 This will:
-Start PostgreSQL
-Start the Spring Boot backend
-Automatically connect the backend to the database
-Backend API will be available at:
+- Start the PostgreSQL database
+- Start the Spring Boot backend
+- Automatically connect the backend to the database
+
+The backend API will be available at:
 http://localhost:8085
 
-🚀 Run Frontend
-Prerequisites
-Node.js (v16+)
-npm
+---
 
-🔐 Authentication Flow
-User logs in using email and password
-Backend validates credentials
-JWT token is generated and returned
-Frontend stores the token
-Token is sent in the Authorization header for protected API calls
-📡 Main API Endpoints
-Method	Endpoint	Description
-POST	/auth/login	Authenticate user
-GET	/api/projects	List user projects
-POST	/api/projects	Create project
-GET	/api/projects/{id}	Get project details
-DELETE	/api/projects/{id}	Delete project
-GET	/api/projects/{id}/progress	Project progress
-GET	/api/tasks	List all user tasks
-GET	/api/tasks/project/{id}	List project tasks
-POST	/api/tasks/project/{id}	Create task
-PUT	/api/tasks/{id}	Update task
-DELETE	/api/tasks/{id}	Delete task
-🧪 Testing
+## 🚀 Run Frontend
+
+### Prerequisites
+- Node.js (v16+)
+- npm
+
+From the frontend folder, run:
+
+    cd taskmanager-frontend
+    npm install
+    npm run dev
+
+The frontend application will be available at:
+http://localhost:5173
+
+---
+
+## 🔐 Authentication Flow
+
+1. User logs in using email and password
+2. Backend validates credentials
+3. A JWT token is generated and returned
+4. Frontend stores the token
+5. The token is sent in the Authorization header for protected API calls
+
+---
+
+## 📡 Main API Endpoints
+
+POST   /auth/login                  Authenticate user  
+GET    /api/projects                List user projects  
+POST   /api/projects                Create project  
+GET    /api/projects/{id}           Get project details  
+DELETE /api/projects/{id}           Delete project  
+GET    /api/projects/{id}/progress  Project progress  
+GET    /api/tasks                   List all user tasks  
+GET    /api/tasks/project/{id}      List project tasks  
+POST   /api/tasks/project/{id}      Create task  
+PUT    /api/tasks/{id}              Update task  
+DELETE /api/tasks/{id}              Delete task  
+
+---
+
+## 🧪 Testing
+
 Unit tests are implemented for:
-Authentication service
-Project service
-Task service
-User service
+- Authentication service
+- Project service
+- Task service
+- User service
+
 Tests are written using JUnit 5 and Mockito, without loading the Spring context.
 
-👤 Author
-Mohamed El Outmani
-Full-Stack Developer – Java / Spring Boot / React
+To run tests:
+
+    cd taskmanager - backend
+    mvn test
+
+---
+
+## 👤 Author
+
+Mohamed El Outmani  
+Full-Stack Developer – Java / Spring Boot / React  
 GitHub: https://github.com/mohamed-eloutmani
