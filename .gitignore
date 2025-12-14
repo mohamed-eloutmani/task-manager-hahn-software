@@ -1,0 +1,29 @@
+# ===============================
+# Backend - Spring Boot (Maven)
+# Folder: taskmanager - backend
+# ===============================
+taskmanager - backend/target/
+taskmanager - backend/.idea/
+taskmanager - backend/.classpath
+taskmanager - backend/.project
+taskmanager - backend/.settings/
+
+# ===============================
+# Frontend - React (Vite)
+# Folder: taskmanager-frontend
+# ===============================
+taskmanager-frontend/node_modules/
+taskmanager-frontend/dist/
+
+# ===============================
+# OS / Editor files
+# ===============================
+.DS_Store
+.vscode/
+.idea/
+
+# ===============================
+# Logs
+# ===============================
+*.log
+
