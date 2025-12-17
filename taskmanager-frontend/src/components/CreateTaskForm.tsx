@@ -25,6 +25,12 @@ export default function CreateTaskForm({ projectId, onCreated }: Props) {
     e.preventDefault();
     if (!title.trim()) return;
 
+    const today = new Date().toISOString().split("T")[0];
+    if (dueDate && dueDate < today) {
+      alert("Due date must be today or in the future");
+      return;
+    }
+
     setLoading(true);
 
     await createTask(projectId, {
@@ -71,6 +77,9 @@ export default function CreateTaskForm({ projectId, onCreated }: Props) {
               type="date"
               fullWidth
               InputLabelProps={{ shrink: true }}
+              inputProps={{
+                min: new Date().toISOString().split("T")[0], //  blocks past dates
+              }}
               value={dueDate ?? ""}
               onChange={(e) =>
                 setDueDate(e.target.value || undefined)

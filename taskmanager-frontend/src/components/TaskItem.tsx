@@ -21,6 +21,21 @@ type Props = {
   task: TaskDto;
   onUpdated: () => void;
 };
+function getDaysLeft(dueDate?: string) {
+    if (!dueDate) return null;
+
+    const today = new Date();
+    const due = new Date(dueDate);
+
+    const diff = Math.ceil(
+      (due.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
+    );
+
+    if (diff < 0) return "Overdue";
+    if (diff === 0) return "Due today";
+    if (diff === 1) return "1 day left";
+    return `${diff} days left`;
+  }
 
 export default function TaskItem({ task, onUpdated }: Props) {
   const [openEdit, setOpenEdit] = useState(false);
@@ -49,7 +64,11 @@ export default function TaskItem({ task, onUpdated }: Props) {
       >
         <Stack spacing={1}>
           <Typography fontWeight={500}>{task.title}</Typography>
-
+              {task.dueDate && (
+                <Typography variant="caption" color="text.secondary">
+                  {getDaysLeft(task.dueDate)}
+                </Typography>
+              )}
           <Stack direction="row" spacing={1} alignItems="center">
             <Chip
               size="small"

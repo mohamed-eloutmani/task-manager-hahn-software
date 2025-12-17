@@ -22,10 +22,15 @@ public class TaskServiceImpl implements TaskService {
             LocalDate dueDate,
             Project project
     ) {
+        if (dueDate != null && dueDate.isBefore(LocalDate.now())) {
+            throw new IllegalArgumentException("Due date must be in the future");
+        }
+
         Task task = new Task(title, description, dueDate, project);
         task.setStatus(TaskStatus.TODO);
         return taskRepository.save(task);
     }
+
 
     @Override
     public List<Task> getProjectTasks(Long projectId) {
@@ -45,6 +50,10 @@ public class TaskServiceImpl implements TaskService {
             LocalDate dueDate,
             TaskStatus status
     ) {
+        if (dueDate != null && dueDate.isBefore(LocalDate.now())) {
+            throw new IllegalArgumentException("Due date must be in the future");
+        }
+
         task.setTitle(title);
         task.setDescription(description);
         task.setDueDate(dueDate);
@@ -52,6 +61,7 @@ public class TaskServiceImpl implements TaskService {
 
         return taskRepository.save(task);
     }
+
 
     @Override
     public void deleteTask(Task task) {
