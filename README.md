@@ -32,20 +32,27 @@ The goal of this project is to demonstrate:
 - List projects of the authenticated user
 - View project details
 - Delete a project
+- Cascade delete: deleting a project also deletes all its associated tasks
 
 ### ✅ Task Management
 - Create tasks inside a project
-- Update task details
-- Mark tasks as completed
+- Tasks are created with default status **To Do**
+- Update task details and status (**To Do → In Progress → Done**)
 - Delete tasks
 - List tasks by project
 - List all tasks belonging to the authenticated user
+- Filter tasks by status (All / To Do / In Progress / Done)
+
+### 📅 Task Deadlines
+- Tasks include a due date
+- Past dates are not allowed at creation or update
+- The UI displays how many days are left to complete each task
 
 ### 📊 Project Progress
 For each project:
 - Total number of tasks
 - Number of completed tasks
-- Progress percentage
+- Progress percentage updated automatically
 
 ---
 
@@ -65,7 +72,6 @@ The frontend communicates with the backend via REST APIs and manages authenticat
 
 ---
 
-
 ## 🛠️ Technologies Used
 
 ### Backend
@@ -76,13 +82,14 @@ The frontend communicates with the backend via REST APIs and manages authenticat
 - JPA / Hibernate
 - PostgreSQL
 - Maven
-- Docker & Docker Compose
+- Docker & Docker Compose (v2)
 
 ### Frontend
 - React
 - Vite
 - TypeScript
 - Axios
+- Material UI (MUI)
 
 ### Testing
 - JUnit 5
@@ -104,7 +111,7 @@ The backend and PostgreSQL database are fully **Dockerized**.
 From the backend folder, run:
 
     cd taskmanager - backend
-    docker-compose up --build
+    docker compose up --build
 
 This will:
 - Start the PostgreSQL database
@@ -145,17 +152,17 @@ http://localhost:5173
 
 ## 📡 Main API Endpoints
 
-POST   /auth/login                  Authenticate user  
-GET    /api/projects                List user projects  
-POST   /api/projects                Create project  
-GET    /api/projects/{id}           Get project details  
-DELETE /api/projects/{id}           Delete project  
-GET    /api/projects/{id}/progress  Project progress  
-GET    /api/tasks                   List all user tasks  
-GET    /api/tasks/project/{id}      List project tasks  
-POST   /api/tasks/project/{id}      Create task  
-PUT    /api/tasks/{id}              Update task  
-DELETE /api/tasks/{id}              Delete task  
+    POST   /auth/login                  Authenticate user
+    GET    /api/projects                List user projects
+    POST   /api/projects                Create project
+    GET    /api/projects/{id}           Get project details
+    DELETE /api/projects/{id}           Delete project
+    GET    /api/projects/{id}/progress  Project progress
+    GET    /api/tasks                   List all user tasks
+    GET    /api/tasks/project/{id}      List project tasks
+    POST   /api/tasks/project/{id}      Create task
+    PUT    /api/tasks/{id}              Update task
+    DELETE /api/tasks/{id}              Delete task
 
 ---
 
@@ -167,17 +174,19 @@ Unit tests are implemented for:
 - Task service
 - User service
 
-Tests are written using JUnit 5 and Mockito, without loading the Spring context.
+Tests are written using **JUnit 5** and **Mockito**, without loading the Spring context.
 
 To run tests:
 
     cd taskmanager - backend
     mvn test
 
+All tests pass successfully.
+
 ---
 
 ## 👤 Author
 
-Mohamed El Outmani  
+**Mohamed El Outmani**  
 Full-Stack Developer – Java / Spring Boot / React  
 GitHub: https://github.com/mohamed-eloutmani
